@@ -16,16 +16,16 @@ import "./BuySell.css"
 export default function BuySell() {
   
   const [value, setValue] = useState("");
-  const [buy_sell, setBuy_sell] = useState("");
-  const [user, setUser] = useState('');
-  const [limar, setLimar] = useState('');
+  const [buy_sell, setBuy_sell] = useState("BUY");
+  const [user, setUser] = useState('User A');
+  const [limar, setLimar] = useState('LIMIT');
   const [amount, setAmount] = useState('')
   const [price, setPrice] = useState('')
   
   const handleSubmit = (e) => {
     e.preventDefault();
     const info = {buy_sell,user,limar,amount,price};
-
+    console.log(info)
     fetch('http://localhost:5000/post', {
       method: 'POST',
       headers : {"Content-Type": "application/json"},
@@ -48,17 +48,17 @@ export default function BuySell() {
           <label className="lebels">
             
             <select name = "buy_sell" value={buy_sell} onChange={(e)=>{
-              setBuy_sell(e.value)
+              setBuy_sell(e.target.value)
             }}>
               <option value="buy">BUY</option>
-              <option value="shell">SELL</option>
+              <option value="sell">SELL</option>
               
             </select>
           </label>
           <label className="lebels">
             
             <select name='user' value={user} onChange={(e)=>{
-              setUser(e.value)
+              setUser(e.target.value)
             }}>
               
               <option value="User A">User A</option>
@@ -73,7 +73,7 @@ export default function BuySell() {
           <label className="lebels">
             
             <select name="limar" value={limar} onChange={(e)=>{
-              setLimar(e.value)
+              setLimar(e.target.value)
             }}>
               <option value="limit">LIMIT</option>
               <option value="market">MARKET</option>
@@ -84,13 +84,13 @@ export default function BuySell() {
         <label className="labels">
           Stock AMOUNT 
           <input name='amount' value={amount} onChange={(e)=>{
-            setAmount(e.value)
+            setAmount(e.target.value)
           }}/>
         </label>
         <label className="labels">
          AT PRICE 
           <input name='price' value={price} onChange={(e)=>{
-            setPrice(e.value)
+            setPrice(e.target.value)
           }}/>
         </label>
 

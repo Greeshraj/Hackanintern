@@ -1,33 +1,31 @@
-import React from 'react'
+import React, { useState,useEffect } from 'react'
 import "./UserPortfolio.css";
-const data = [
-    { user: "Anom", stock: 19, fiats: "10" },
-    { user: "Megha", stock: 19, fiats: "5" },
-    { user: "Subham", stock: 25, fiats: "6"},
-    { user: "Anom", stock: 19, fiats: "7" },
-    { user: "Megha", stock: 19, fiats: "8" },
-    { user: "Subham", stock: 25, fiats: "15"},
-  ]
+import Userdata from './Userdata';
 export default function UserPortfolio() {
+   const [data, setData ] = useState([])
+   const [isLoading, setIsLoading] = useState(true)
+   const [error, setError] = useState(false)
+
+        useEffect(() => {
+    fetch('http://localhost:5000/user')
+    .then(res => {
+      if(!res.ok){
+        throw Error = "could not fetch data"
+      }
+      return res.json()
+
+    })
+    .then(info => {
+      setIsLoading(false)
+      setData(info)
+    })
+    .catch(err => {
+      setError(err.message)
+    })
+  }, [data])
+
+
   return (
-      //     USERPORTFOLIO
-      <div className="user">
-<table>
-        <tr>
-        <th>User name</th>
-          <th>Stocks</th>
-          <th>Fiats</th>
-        </tr>
-        {data.map((val, key) => {
-            return (
-                <tr key={key}>
-              <td>{val.user}</td>
-              <td>{val.stock}</td>
-              <td>{val.fiats}</td>
-            </tr>
-          )
-        })}
-      </table>
-          </div>
+      <Userdata data = {data} />
   )
 }

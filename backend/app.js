@@ -39,6 +39,23 @@ app.get('/', (req, res) => {
         })
     })  
 })
+app.get('/user', (req, res) => {
+    pool.getConnection((err, conn) => {
+        if(err) throw err
+        console.log(`connected as id--- ${conn.threadId}`)
+
+        // query(sqlString, callback)
+        conn.query('SELECT * FROM users', (err, rows) => {
+            conn.release() //return the connection to pool
+
+            if(!err) {
+                res.send(rows)
+            }else {
+                console.log(err);
+            }
+        })
+    })  
+})
 
 
 
