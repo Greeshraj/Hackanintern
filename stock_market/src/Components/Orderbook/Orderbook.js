@@ -1,41 +1,34 @@
 import React from 'react'
+import { useEffect, useState } from 'react';
+import axios from 'axios';
+
 import "./Orderbook.css"
+import Orderbookdata from './Orderbookdata';
 export default function Orderbook() {
+    const [data, setData] = useState();
+  const [isloading, setIsLoading]  = useState(true);
+  const [error, setError] = useState(null);
+
+    useEffect(() => {
+    fetch('http://localhost:5000/')
+    .then(res => {
+      if(!res.ok){
+        throw Error = "could not fetch data"
+      }
+      return res.json()
+
+    })
+    .then(info => {
+      setIsLoading(false)
+      setData(info)
+    })
+    .catch(err => {
+      setError(err.message)
+    })
+  }, [data])
+
+
   return (
-    <div className="orderbook">
-        Orderbook
-      <div className="buy">
-      <table>Buy
-  <tr>
-    <th>Quantity</th>
-    <th>Price</th>
-  </tr>
-  <tr>
-    <td>25</td>
-    <td>100</td>
-  </tr>
-  <tr>
-    <td>9</td>
-    <td>99</td>
-  </tr>
-</table>
-      </div>
-      <div className="sell">
-      <table>Sell
-  <tr>
-    <th>Price</th>
-    <th>Quantity</th>
-  </tr>
-  <tr>
-    <td>101</td>
-    <td>17</td>
-  </tr>
-  <tr>
-    <td>100</td>
-    <td>7</td>
-  </tr>
-</table>
-</div>
-    </div>
+    <Orderbookdata data = {data} />
   )
 }
