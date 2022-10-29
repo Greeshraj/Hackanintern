@@ -1,0 +1,25 @@
+.buysell{
+    border: 2px solid black;
+    height: 43.4vh;
+    width: 38vw;
+    text-align: center;
+   position: relative;
+   left: 16.53vw;
+    font-size: 10px;
+    top: 0vh;
+    background-color: rgb(236, 244, 149);
+}
+.bsupper{
+    display: flex;
+    align-items: center;
+    align-content: center;
+    text-align: center;
+
+}
+.lebels{
+    position : relative;
+    left : 160px;
+    padding: 30px;
+    width: 30px;
+    height: 20px;
+}

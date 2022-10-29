@@ -11,3 +11,28 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+.graphorder{
+  display: flex;
+  background-color: rgb(167, 159, 202);
+ height: 38vh; 
+ position: relative;
+ top: 10vh;
+}
+.bottom{
+  display: flex;
+  display: flex;
+  background-color: rgb(167, 159, 202);
+ height: 44vh; 
+ position: relative;
+ top: 15vh;
+}
+.currenttrade{
+display: flex;
+flex-direction: column;
+ 
+position: relative;
+left: 10vw;
+height: 35vh;
+top: 5vh;
+width: 15vw;
+}

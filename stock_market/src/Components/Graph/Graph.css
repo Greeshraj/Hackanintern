@@ -1,0 +1,10 @@
+ .graph{
+    border: 2px solid black;
+    height: 37.4vh;
+    width: 38vw;
+    text-align: center;
+   position: relative;
+   left: 7vw;
+    /* font-size: 60px; */
+    background-color: rgb(236, 244, 149);
+ }

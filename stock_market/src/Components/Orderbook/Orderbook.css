@@ -1,0 +1,33 @@
+.orderbook{
+    border: 2px solid black;
+    height: 32vh;
+    width: 35vw;
+    text-align: center;
+    position: relative;
+    left: 14vw;
+    font-size: 30px;
+    background-color: rgb(236, 244, 149);
+}
+.buy{
+    display: flex;
+    border: 2px solid black;
+    height: 20vh;
+    width: 16vw;
+    text-align: center;
+    position: left;
+    left: 14vw;
+    font-size: 20px;
+    background-color: rgb(236, 244, 149);
+}
+.sell{
+    display: flex;
+    border: 2px solid black;
+    height: 20vh;
+    width: 16vw;
+    text-align: center;
+    position: relative;
+    right: -18.5vw;
+    bottom: 20.70vh;
+    font-size: 20px;
+    background-color: rgb(236, 244, 149);
+}

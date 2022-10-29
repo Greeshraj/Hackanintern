@@ -1,0 +1,34 @@
+.user{
+    border: 5px solid black;
+    border-radius: 10px;
+    height: 30vh;
+    width: 20vw;
+    text-align: center;
+   position: relative;
+   left: 8vw;
+   top: 9vh;
+    font-size: 15px;
+    background-color: rgb(236, 244, 149);
+}
+/* 
+.user {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  } */
+  
+  table {
+    border: 2px solid forestgreen;
+    width: 100%;
+    height:100%;
+  }
+    
+  th {
+    border-bottom: 1px solid black;
+  }
+    
+  td {
+    text-align: center;
+  }
