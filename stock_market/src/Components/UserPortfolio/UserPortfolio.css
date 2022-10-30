@@ -7,8 +7,10 @@
    position: relative;
    left: 8vw;
    top: 9vh;
-    font-size: 15px;
+    font-size: 19px;
     background-color: rgb(236, 244, 149);
+    background-color: transparent;
+   
 }
 /* 
 .user {
@@ -20,7 +22,7 @@
   } */
   
   table {
-    border: 2px solid forestgreen;
+ 
     width: 100%;
     height:100%;
   }

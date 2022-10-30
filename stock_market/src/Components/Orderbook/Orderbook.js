@@ -4,13 +4,15 @@ import axios from 'axios';
 
 import "./Orderbook.css"
 import Orderbookdata from './Orderbookdata';
+import Selldata from './Selldata';
 export default function Orderbook() {
     const [data, setData] = useState();
   const [isloading, setIsLoading]  = useState(true);
   const [error, setError] = useState(null);
+  const [sell, setSell] = useState(null);
 
     useEffect(() => {
-    fetch('http://localhost:5000/')
+    fetch('http://localhost:5000')
     .then(res => {
       if(!res.ok){
         throw Error = "could not fetch data"
@@ -29,6 +31,13 @@ export default function Orderbook() {
 
 
   return (
-    <Orderbookdata data = {data} />
+
+    <div className="orderbook">
+      <h5>Orderbook</h5>
+    <div className='buy'>
+      <Orderbookdata data = {data} />
+    </div>
+    
+    </div>
   )
 }

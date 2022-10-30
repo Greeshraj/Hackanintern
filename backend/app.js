@@ -57,6 +57,42 @@ app.get('/user', (req, res) => {
     })  
 })
 
+app.get('/buy', (req, res) => {
+    pool.getConnection((err, conn) => {
+        if(err) throw err
+        console.log(`connected as id--- ${conn.threadId}`)
+
+        // query(sqlString, callback)
+        conn.query('SELECT * FROM buy_sell WHERE buy_sell = "BUY"', (err, rows) => {
+            conn.release() //return the connection to pool
+
+            if(!err) {
+                res.send(rows)
+            }else {
+                console.log(err);
+            }
+        })
+    })  
+})
+
+app.get('/sell', (req, res) => {
+    pool.getConnection((err, conn) => {
+        if(err) throw err
+        console.log(`connected as id--- ${conn.threadId}`)
+
+        // query(sqlString, callback)
+        conn.query('SELECT * FROM buy_sell WHERE buy_sell = "sell"', (err, rows) => {
+            conn.release() //return the connection to pool
+
+            if(!err) {
+                res.send(rows)
+            }else {
+                console.log(err);
+            }
+        })
+    })  
+})
+
 
 
 app.get('/:id', (req, res) => {
@@ -106,15 +142,28 @@ app.post('/post', (req, res) => {
         console.log(params)
 
         // query(sqlString, callback)
-        conn.query('INSERT INTO buy_sell SET ?', params ,(err, rows) => {
-            conn.release() //return the connection to pool
 
-            if(!err) {
-                res.send(`data with price ${params.id} has been added`)
-            }else {
-                console.log(err);
-            }
-        })
+        if (params.buy_sell  == "BUY"){
+            conn.query('UPDATE order_book SET bid = bid + ? WHERE price = ?', [params.amount, params.price] ,(err, rows) => {
+                conn.release() //return the connection to pool
+    
+                if(!err) {
+                    res.send(`data with price ${params.id} has been added`)
+                }else {
+                    console.log(err);
+                }
+            })
+        }else {
+            conn.query('UPDATE order_book SET ask = ask + ? WHERE price = ?', [params.amount,params.price] ,(err, rows) => {
+                conn.release() //return the connection to pool
+    
+                if(!err) {
+                    res.send(`data with price ${params.id} has been added`)
+                }else {
+                    console.log(err);
+                }
+            })
+        }
     })  
 })
 

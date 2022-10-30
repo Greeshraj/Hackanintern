@@ -21,6 +21,7 @@ export default function BuySell() {
   const [limar, setLimar] = useState('LIMIT');
   const [amount, setAmount] = useState('')
   const [price, setPrice] = useState('')
+  const [added, setAdded] = useState(false);
   
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -33,6 +34,7 @@ export default function BuySell() {
     })
     .then(() => {
       console.log('added')
+      setAdded(true)
     })
   }
 
@@ -82,22 +84,33 @@ export default function BuySell() {
           </label>
         </div>
         <label className="labels">
-          Stock AMOUNT 
+          Stock Amount 
           <input name='amount' value={amount} onChange={(e)=>{
             setAmount(e.target.value)
           }}/>
         </label>
-        <label className="labels">
-         AT PRICE 
-          <input name='price' value={price} onChange={(e)=>{
-            setPrice(e.target.value)
-          }}/>
-        </label>
+        <label className="lebels">
+              Price
+            <select name='price' value={price} onChange={(e)=>{
+              setPrice(e.target.value)
+            }}>
+              
+              <option value="91">91</option>
+              <option value="92">92</option>
+              <option value="93">93</option>
+              <option value="94">94</option>
+              <option value="95">95</option>
+              <option value="96">96</option>
+              
+            </select>
+          </label>
 
         <div class="submit">
           <button name='submit'>Place Order</button>
         </div>
 
+
+          {added && <span>added</span>}
       
          
       </form>

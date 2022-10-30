@@ -1,5 +1,5 @@
 .current{
-    border: 5px solid black;
+    border: 3px solid black;
     border-radius: 10px;
     height: 5vh;
     width: 10vw;
@@ -7,5 +7,14 @@
    position: relative;
    
     font-size: 15px;
-    background-color: rgb(236, 244, 149);
+    
+    background-color: transparent;
+     font-family:fantasy;
+    font-weight: 100;
+}
+.current h7{
+    font-size: 24px;
+    font-family:'Times New Roman', Times, serif;
+    color: rgb(50, 12, 241);
+    font-weight: 900
 }

@@ -1,5 +1,5 @@
 .trade{
-    border: 5px solid black;
+    border: 3px solid black;
     border-radius: 10px;
     height: 23vh;
     width: 10vw;
@@ -7,5 +7,7 @@
    position: relative;
  top: 2vh;
     font-size: 20px;
-    background-color: rgb(208, 214, 196);
+  
+    background-color: transparent;
+ 
 }
