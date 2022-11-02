@@ -95,42 +95,26 @@ app.get('/sell', (req, res) => {
 
 
 
-app.get('/:id', (req, res) => {
-    pool.getConnection((err, conn) => {
-        if(err) throw err
-        console.log(`connected as id ${conn.threadId}`)
-
-        // query(sqlString, callback)
-        conn.query('SELECT * FROM order_book where id = ?', [req.params.id] ,(err, rows) => {
-            conn.release() //return the connection to pool
-
-            if(!err) {
-                res.send(rows)
-            }else {
-                console.log(err);
-            }
-        })
-    })  
-})
 
 
-app.delete('/:id', (req, res) => {
-    pool.getConnection((err, conn) => {
-        if(err) throw err
-        console.log(`connected as id ${conn.threadId}`)
 
-        // query(sqlString, callback)
-        conn.query('DELETE FROM order_book where id = ?', [req.params.id] ,(err, rows) => {
-            conn.release() //return the connection to pool
+// app.delete('/:id', (req, res) => {
+//     pool.getConnection((err, conn) => {
+//         if(err) throw err
+//         console.log(`connected as id ${conn.threadId}`)
 
-            if(!err) {
-                res.send(`data with id ${[req.params.id]} has been removed`)
-            }else {
-                console.log(err);
-            }
-        })
-    })  
-})
+//         // query(sqlString, callback)
+//         conn.query('DELETE FROM order_book where id = ?', [req.params.id] ,(err, rows) => {
+//             conn.release() //return the connection to pool
+
+//             if(!err) {
+//                 res.send(`data with id ${[req.params.id]} has been removed`)
+//             }else {
+//                 console.log(err);
+//             }
+//         })
+//     })  
+// })
 
 
 app.post('/post', (req, res) => {
@@ -141,10 +125,12 @@ app.post('/post', (req, res) => {
         const params = req.body
         console.log(params)
 
+        const {amount, price, user } = req.body
+
         // query(sqlString, callback)
 
-        if (params.buy_sell  == "BUY"){
-            conn.query('UPDATE order_book SET bid = bid + ? WHERE price = ?', [params.amount, params.price] ,(err, rows) => {
+        if (params.buy_sell  == "buy"){
+            conn.query('UPDATE order_book, users SET order_book.bid = order_book.bid + ?, users.stocks = users.stocks + ?, users.fiat = users.fiat + ? * ?  WHERE order_book.price = ? and users.username = ?', [params.amount, amount, price, amount, params.price, user] ,(err, rows) => {
                 conn.release() //return the connection to pool
     
                 if(!err) {
@@ -154,7 +140,7 @@ app.post('/post', (req, res) => {
                 }
             })
         }else {
-            conn.query('UPDATE order_book SET ask = ask + ? WHERE price = ?', [params.amount,params.price] ,(err, rows) => {
+            conn.query('UPDATE order_book, users SET order_book.ask = order_book.ask + ?, users.stocks = users.stocks - ?, users.fiat = users.fiat - ? * ?  WHERE order_book.price = ? and users.username = ?', [params.amount, amount, price, amount, params.price, user] ,(err, rows) => {
                 conn.release() //return the connection to pool
     
                 if(!err) {
@@ -167,26 +153,6 @@ app.post('/post', (req, res) => {
     })  
 })
 
-app.patch('/:id', (req, res) => {
-    pool.getConnection((err, conn) => {
-        if(err) throw err
-        console.log(`connected as id ${conn.threadId}`)
-
-        const params = req.body
-        const {id, bid, price, ask} = req.body
-
-        // query(sqlString, callback)
-        conn.query('UPDATE order_book SET bid = ? WHERE id = ?', [bid,req.params.id] ,(err, rows) => {
-            conn.release() //return the connection to pool
-
-            if(!err) {
-                res.send(`data with id ${req.params.id} has been updated`)
-            }else {
-                console.log(err);
-            }
-        })
-    })  
-})
 
 
 // update a record
